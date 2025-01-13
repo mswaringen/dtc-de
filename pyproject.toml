@@ -1,0 +1,16 @@
+[project]
+name = "dtc-de"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas>=2.2.3",
+    "pgcli>=4.1.0",
+    "sqlalchemy>=2.0.37",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.29.5",
+]
