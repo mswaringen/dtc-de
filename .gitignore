@@ -172,3 +172,4 @@ cython_debug/
 
 data/
 ny_taxi_postgres_data/
+pgadmin_data/

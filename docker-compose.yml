@@ -1,0 +1,33 @@
+services:
+  pg-database:
+   image: postgres:13
+   environment:
+     POSTGRES_USER: root
+     POSTGRES_PASSWORD: root
+     POSTGRES_DB: ny_taxi
+   volumes:
+     - ./ny_taxi_postgres_data:/var/lib/postgresql/data
+   ports:
+     - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "8080:80"
+    volumes:
+      - ./pgadmin_data:/var/lib/pgadmin
+
+  data-loader:
+    image: yellow-taxi-pipeline:v4
+    depends_on:
+      - pg-database
+    environment:
+      - DB_HOST=pg-database
+    volumes:
+     - ./data:/app/data
+     # Prevent the container from starting automatically
+    deploy:
+      replicas: 0
