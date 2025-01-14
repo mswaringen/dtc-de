@@ -48,3 +48,21 @@ gzip -d data/yellow_tripdata_2021-01.csv.gz
 docker compose up
 ##### runs the pipeline script in the container
 docker compose run --rm data-loader python scripts/pipeline.py /app/data/yellow_tripdata_2021-01.csv
+
+
+### SQL Commands
+
+SELECT 
+	tpep_pickup_datetime,
+	tpep_dropoff_datetime,
+	total_amount,
+	CONCAT(zpu."Borough" , ' / ' , zpu."Zone") AS "pickup_loc",
+	CONCAT(zpu."Borough" , ' / ' , zdo."Zone") AS "dropoff_loc"
+FROM 
+	yellow_taxi_data t,
+	zones zpu,
+	zones zdo
+WHERE
+	t."PULocationID" = zpu."LocationID" AND
+	t."DOLocationID" = zdo."LocationID"
+LIMIT 100;
