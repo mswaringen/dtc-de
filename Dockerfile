@@ -5,7 +5,8 @@ RUN pip install pandas sqlalchemy psycopg2-binary
 WORKDIR /app
 
 # Copy the pipeline script
-COPY scripts/pipeline.py scripts/pipeline.py
+COPY WEEK-1/scripts/pipeline.py scripts/pipeline.py
+COPY WEEK-1/scripts/pipeline-green.py scripts/pipeline-green.py
 
 # Copy the CSV file, dont need to do this if mounting as a volume
 # COPY data/yellow_tripdata_2021-01.csv data/yellow_tripdata_2021-01.csv

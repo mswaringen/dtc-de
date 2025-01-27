@@ -6,7 +6,7 @@ services:
      POSTGRES_PASSWORD: root
      POSTGRES_DB: ny_taxi
    volumes:
-     - ./ny_taxi_postgres_data:/var/lib/postgresql/data
+     - ./WEEK-1/ny_taxi_postgres_data:/var/lib/postgresql/data
    ports:
      - "5432:5432"
 
@@ -18,16 +18,16 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./pgadmin_data:/var/lib/pgadmin
+      - ./WEEK-1/pgadmin_data:/var/lib/pgadmin
 
   data-loader:
-    image: yellow-taxi-pipeline:v4
+    image: yellow-taxi-pipeline:v5
     depends_on:
       - pg-database
     environment:
       - DB_HOST=pg-database
     volumes:
-     - ./data:/app/data
+     - ./WEEK-1/data:/app/data
      # Prevent the container from starting automatically
     deploy:
       replicas: 0
